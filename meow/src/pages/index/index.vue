@@ -1,17 +1,19 @@
 <template>
   <div class="container">
+
     <ul class="meow">
       <li v-for="(item, index) in source" :key="index" @tap="playEvery(item)">
-        {{item.icon}}
+        <image
+          :src="item.img"
+          mode="widthFix"
+          style="width: 100rpx; height: 100rpx"
+        />
       </li>
     </ul>
     <div class="meow-btn">
       <div class="btn" @tap="playBackgroundAudio">
         <div class="bak-active"></div>
         <div class="bak"></div>
-        <!-- <div class="text">
-          {{status}}
-        </div> -->
         <div v-if="status === 'play' || status === 'randomPlay'">
           <div class="text">播放中...</div>
         </div>
@@ -39,17 +41,17 @@ import card from '@/components/card'
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 
 let mp3Source = [
-  {icon: '1', text: '打呼噜', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8TvyUstthTP.mp3'},
-  {icon: '2', text: '缠你', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8WRHBqcpjtE.mp3'},
-  {icon: '3', text: '大猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8TUqIVfjCqo.mp3'},
-  {icon: '4', text: '小猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8xuAgRMkoZs.mp3'},
-  {icon: '5', text: '老猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8wbcXtfQHKM.mp3'},
-  {icon: '6', text: '喵叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8HeQzppsVNH.mp3'},
-  {icon: '7', text: '撒娇', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8yfZMhAUNyD.mp3'},
-  {icon: '8', text: '小猫叫声', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8gFvkVmahRv.mp3'},
-  {icon: '9', text: '要食物', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8bpHbEjnbxZ.mp3'},
-  {icon: '10', text: '野外叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8YTnzDtcJkN.mp3'},
-  {icon: '11', text: '半大猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv7IXipGDSssC.mp3'}
+  {icon: '打呼噜', text: '打呼噜', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8TvyUstthTP.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZtWgHqJVEmh.png'},
+  {icon: '缠你', text: '缠你', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8WRHBqcpjtE.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZAdTUspjgAW.png'},
+  {icon: '大猫叫', text: '大猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8TUqIVfjCqo.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZqNzzmCgilV.png'},
+  {icon: '小猫叫', text: '小猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8xuAgRMkoZs.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZYNLUAAXKLJ.png'},
+  {icon: '老猫叫', text: '老猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8wbcXtfQHKM.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZHziOOxHhim.png'},
+  {icon: '喵叫', text: '喵叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8HeQzppsVNH.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZZZomVpyGAj.png'},
+  {icon: '撒娇', text: '撒娇', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8yfZMhAUNyD.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZQkutyBWGmO.png'},
+  {icon: '小猫叫声', text: '小猫叫声', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8gFvkVmahRv.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZIYwnVnloxP.png'},
+  {icon: '要食物', text: '要食物', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8bpHbEjnbxZ.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZDGNMzJzQFj.png'},
+  {icon: '野外叫', text: '野外叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv8YTnzDtcJkN.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZazruPHitqY.png'},
+  {icon: '半大猫叫', text: '半大猫叫', sourceUrl: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f5vv7IXipGDSssC.mp3', img: 'https://cloud-minapp-13037.cloud.ifanrusercontent.com/1f7ezZYNLUAAXKLJ.png'}
 ]
 
 export default {
@@ -115,6 +117,9 @@ export default {
       this.playAudio()
     },
     playEvery (mp3Obj) {
+      if (this.status !== 'play' || this.status !== 'playPause') {
+        this.randomMp3List = []
+      }
       this.randomMp3List.unshift(mp3Obj)
       if (this.randomMp3List.length > 5) {
         this.randomMp3List.shift()
@@ -226,9 +231,12 @@ export default {
 .meow li{
   width: 100rpx;
   height: 100rpx;
+  line-height: 100rpx;
   display: inline-block;
   margin: 10rpx;
   background: #21CBBF;
+  overflow: hidden;
+  font-size: 20rpx;
   border-radius: 15rpx;
 }
 .container{
