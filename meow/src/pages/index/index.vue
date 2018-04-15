@@ -29,7 +29,11 @@
     </div>
     <ul class="meow">
       <li v-for="(item, index) in randomMp3List" :key="index" >
-        {{item.icon}}
+        <image
+          :src="item.img"
+          mode="widthFix"
+          style="width: 100rpx; height: 100rpx"
+        />
       </li>
     </ul>
   </div>
